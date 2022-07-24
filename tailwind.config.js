@@ -11,6 +11,7 @@ module.exports = {
         "brand-amber": "#FF8656",
         "brand-blue": "#1B273C",
         "icon-blue": "#346E8C",
+        "chart-text": "#49A7CB",
       },
     },
   },

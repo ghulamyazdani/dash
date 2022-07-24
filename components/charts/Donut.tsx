@@ -1,80 +1,64 @@
 import React from "react";
 import ReactEchartsCore from "echarts-for-react/lib/core";
 import echarts from "echarts";
-
-const data = {
-  totalView: [
-    { name: "Core Site", value: 24688 },
-    { name: "Other", value: 98745 },
-  ],
-  totalIp: [
-    { name: "Core Site", value: 214 },
-    { name: "Other", value: 1213 },
-  ],
-  totalAttack: [
-    { name: "Core Site", value: 195 },
-    { name: "Other", value: 1760 },
-  ],
-  todayAttack: [
-    { name: "Core Site", value: 31 },
-    { name: "Other", value: 281 },
-  ],
-  sensitiveArea: {
-    name: [
-      "Turkey",
-      "Syria",
-      "Iran",
-      "Iraq",
-      "Afghanistan",
-      "Saudi Arabia",
-      "Nigeria",
-    ],
-    value: [40, 4, 27, 19, 32, 15, 9],
-  },
-};
-const option = (title: any, data: any, color: any): any => ({
-  color: ["#515c61", color],
-  title: {
-    text: `${data
-      .map((x: any) => x.value)
-      .reduce((a: any, b: any) => a + b, 0)}`,
-    top: "middle",
-    left: "center",
-    textStyle: {
-      color: "#ffffff",
-      fontSize: 14,
-    },
-  },
-  tooltip: {
-    position: [10, 10],
-  },
-  series: [
-    {
-      type: "pie",
-      radius: ["60%", "75%"],
-      clockwise: false,
-      label: {
-        normal: {
-          show: false,
-        },
-      },
-      labelLine: {
-        normal: {
-          show: false,
-        },
-      },
-      hoverAnimation: false,
-      data,
-    },
-  ],
-});
-
-export const Donut = () => {
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+export const Donut = ({ percentage }: any) => {
   return (
     <div>
-      <ReactEchartsCore
-        option={option("just check", data.totalView, "#346E8C")}
-        echarts={echarts}
+      <CircularProgressbar
+        value={percentage}
+        text={`${percentage}%`}
+        // styles={buildStyles({
+        //   strokeLinecap: "butt",
+        //   textColor: "white",
+        //   pathColor: "#4FB7DD",
+        //   trailColor: "#343E53",
+        // })}
+        styles={{
+          // Customize the root svg element
+          root: {
+            width: "60px",
+          },
+          // Customize the path, i.e. the "completed progress"
+          path: {
+            // Path color
+            stroke: `#4FB7DD`,
+            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+            strokeLinecap: "butt",
+            // Customize transition animation
+            transition: "stroke-dashoffset 0.5s ease 0s",
+            // Rotate the path
+            transform: "rotate(0.25turn)",
+            transformOrigin: "center center",
+          },
+          // Customize the circle behind the path, i.e. the "total progress"
+          trail: {
+            // Trail color
+            stroke: "#343E53",
+            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+            strokeLinecap: "butt",
+            // Rotate the trail
+            transform: "rotate(0.25turn)",
+            transformOrigin: "center center",
+          },
+          // Customize the text
+          text: {
+            // Text color
+            fill: "white",
+            // Text size
+            fontSize: "26px",
+            fontWeight: "bold",
+          },
+          // Customize background - only used when the `background` prop is true
+          background: {
+            fill: "#343E53",
+          },
+        }}
       />
     </div>
   );
