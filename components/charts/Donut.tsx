@@ -7,7 +7,7 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-export const Donut = ({ percentage }: any) => {
+export const Donut = ({ percentage, size }: any) => {
   return (
     <div>
       <CircularProgressbar
@@ -22,7 +22,7 @@ export const Donut = ({ percentage }: any) => {
         styles={{
           // Customize the root svg element
           root: {
-            width: "60px",
+            width: `${size}px`,
           },
           // Customize the path, i.e. the "completed progress"
           path: {
